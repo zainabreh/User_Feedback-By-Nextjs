@@ -6,9 +6,9 @@ import { sendEmail } from "@/utils/mailer";
 
 dbConnection();
 
-export const POST = async (request: NextRequest) => {
+export async function POST(request: NextRequest){
   try {
-    const reqBody = await request.json;
+    const reqBody = await request.json();
 
     const { username, email, password } = reqBody;
 
