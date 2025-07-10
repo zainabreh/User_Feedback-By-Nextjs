@@ -1,5 +1,5 @@
 import bcryptjs from "bcryptjs";
-import User from "@/Models/user.model";
+import User from "@/Models/userModel";
 import nodemailer from "nodemailer";
 
 const generateEmailHTML = (token: string, emailType: "VERIFY" | "RESET") => {
@@ -22,16 +22,16 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     const hashedToken = await bcryptjs.hash(userId.toString(), 10);
 
-    if (emailType === "VERFIY") {
-      await User.findByIdAndUpdate(userId, {
+    if (emailType === "VERIFY") {
+      const updatedUser = await User.findByIdAndUpdate(userId, {$set:{
         verifyToken: hashedToken,
-        verifyTokenExpiry: Date.now() + 300000,
-      });
-    } else if (emailType === "VERFIY") {
-      await User.findByIdAndUpdate(userId, {
+        verifyTokenExpiry: new Date(Date.now() + 3600000),
+      }});
+    } else if (emailType === "RESET") {
+      await User.findByIdAndUpdate(userId, {$set:{
         forgotPasswordToken: hashedToken,
-        forgotPasswordTokenExpiry: Date.now() + 300000,
-      });
+        forgotPasswordTokenExpiry: new Date(Date.now() + 300000),
+      }});
     }
 
 const transporter = nodemailer.createTransport({
@@ -42,6 +42,8 @@ const transporter = nodemailer.createTransport({
     pass: "7ec384dc5c6806"
   }
 });
+
+
 const html = generateEmailHTML(hashedToken,emailType)
     const mailOptions = {
       from: "zainwebtaker@gmail.com",
