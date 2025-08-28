@@ -1,45 +1,53 @@
+'use client'
+import React from 'react'
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Autoplay from 'embla-carousel-autoplay'
+import messages from '@/messages.json'
 
-import Head from "next/head";
 
-export default function Home() {
+const page = () => {
   return (
     <>
-      <Head>
-        <title>Coder Blog</title>
-        <meta
-          name="keywords"
-          content="coder, programming, nextjs, tailwindcsscoding, programming, blog, technology, JavaScript, React"
-        />
-        <meta
-          name="description"
-          content="A blog about coding and technology."
-        />
-        <meta name="author" content="Zainab Rehman" />
-        <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="mobile-web-app-capable"
-          content="yes"
-        />  
-        {/* <script src='/sc.js'></script> */}
-      </Head>
-
-      {/* <Script src="/sc.js" strategy="lazyOnload"></Script> */}
-
-     
-
-      <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <main>
-          <h1 className="font-mono text-6xl font-extrabold ">Coder Blog</h1>
-          <span>A Blog For Coder</span>
-        </main>
-        
-      </div>
+      <main className='flex-grow flex flex-col items-center justify-center px-4 py-12 md:px-24'>
+        <section className='text-center mb-8 md:mb-12'>
+        <h1 className='text-3xl md:text-5xl font-bold'>Dive into the World of Anonymous Conversations</h1>
+        <p className='mt-3 md:mt-4 text-base md:text-lg'>
+          Explore Mystery Message - Where your identity is protected, and your thoughts can be shared freely.
+        </p>
+        </section>
+          <Carousel className="w-full max-w-xs" plugins={[Autoplay({delay: 2000})]}>
+      <CarouselContent>
+        {
+          messages.map((message,index)=>(
+            <CarouselItem key={index}>
+              <div className="p-1">
+                <Card>
+                  <CardHeader>{message.title}</CardHeader>
+                  <CardContent className="flex aspect-square items-center justify-center p-6">
+                    <span className="text-lg font-semibold">{message.content}</span>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))
+        }
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+      </main>
+      <footer className='text-center p-4 md:p-6'>
+        &copy; 2024 Mystery Message. All rights reserved.
+      </footer>
     </>
-  );
+  )
 }
+
+export default page

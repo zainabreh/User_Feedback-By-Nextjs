@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Message from User123",
+        "content": "This is a message from User123",
+        "received":"10 minutes ago"
+    },
+    {
+        "title": "Message from SecretAdmirer",
+        "content": "This is a message from SecretAdmirer",
+        "received":"2 hours ago"
+    },
+    {
+        "title": "Message from User123",
+        "content": "This is a message from User123",
+        "received":"10 minutes ago"
+    },
+    {
+        "title": "Message from MysteryPerson",
+        "content": "This is a message from MysteryPerson",
+        "received":"1 day ago"
+    }
+]
